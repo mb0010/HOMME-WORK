@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вакансияҳо</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        strong {
+            color: #333;
+        }
+        em {
+            color: #4CAF50;
+        }
+        img {
+            display: block;
+            margin-top: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+        p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Вакансияҳо дар категорияи {{ category_name }}</h2>
+        <ul>
+            {% for vacancy in vacancies %}
+                <li>
+                    <strong>{{ vacancy.title }}</strong><br>
+                    <em>Категория: {{ vacancy.category.name }}</em><br>
+                    <p>{{ vacancy.description }}</p>
+                    <p><strong>Локализатсия:</strong> {{ vacancy.location }}</p>
+                    <p><strong>Ном:</strong> {{ vacancy.phone_number_user.name }} {{ vacancy.phone_number_user.last_name }}</p>
+                    <p><strong>Номери телефон:</strong> {{ vacancy.phone_number_user.phone_number }}</p>
+                    {% if vacancy.images %}
+                        <img src="{{ vacancy.images.url }}" alt="{{ vacancy.title }}">
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li>Вакансияҳо барои ин категория мавҷуд нест.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
